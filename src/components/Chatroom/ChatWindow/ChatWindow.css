@@ -1,0 +1,19 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid whitesmoke;
+    padding: 0 16px;
+    height: 4vh;
+}
+
+.header__name {
+    font-size: 1.25rem;
+
+}
+
+.header__features {
+    display: flex;
+    gap: 13px;
+    align-items: center;
+}
