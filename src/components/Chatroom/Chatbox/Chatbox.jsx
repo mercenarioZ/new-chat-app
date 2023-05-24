@@ -1,3 +1,4 @@
+import { Avatar } from 'antd'
 import './Chatbox.css'
 
 const Chatbox = () => {
@@ -8,6 +9,7 @@ const Chatbox = () => {
             }}
             className='chat-box'
         >
+            <Avatar className='chat-avatar' src={null}>C</Avatar>
             <p className='chat-name'>Chat</p>
         </div>
     )

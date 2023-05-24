@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react'
 import { auth } from '../firebase/config'
 import { useNavigate } from 'react-router-dom'
+import { Spin } from 'antd'
 
 export const AuthContext = createContext()
 
@@ -12,7 +13,7 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubsrcibed = auth.onAuthStateChanged((user) => {
-            console.log({ user })
+            // console.log({ user })
             if (user) {
                 const { displayName, uid, email, photoURL } = user
                 setUser({ displayName, uid, email, photoURL })
@@ -21,6 +22,7 @@ const AuthProvider = ({ children }) => {
                 return
             }
 
+            setIsLoading(false)
             navigate('/login')
         })
 
@@ -29,7 +31,7 @@ const AuthProvider = ({ children }) => {
     }, [navigate])
 
     return (
-        <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{ user }}>{isLoading ? <Spin /> : children}</AuthContext.Provider>
     )
 }
 

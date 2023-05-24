@@ -7,13 +7,43 @@
     height: 4vh;
 }
 
-.header__name {
+.header-name {
     font-size: 1.25rem;
-
 }
 
-.header__features {
+.header-features {
     display: flex;
     gap: 13px;
     align-items: center;
+}
+
+.form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.message-list {
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+.message-box {
+    height: 95vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.ant-form-item {
+    flex: 1;
+    margin: 15px 15px 7px 15px;
+}
+
+.ant-form-item-control-input-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
 }
