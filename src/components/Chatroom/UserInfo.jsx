@@ -1,11 +1,25 @@
 import { Avatar, Button, Typography } from 'antd'
+import { useContext } from 'react'
+import { AuthContext } from '../../context/AuthProvider'
 import { auth } from '../../firebase/config'
 
 const { Text } = Typography
 
 const UserInfo = () => {
+    const {
+        user: { photoURL, uid, email, displayName },
+    } = useContext(AuthContext)
+
     return (
-        <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '3px solid whitesmoke', height: '4vh', alignItems: 'center' }}>
+        <div
+            style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                borderBottom: '3px solid whitesmoke',
+                height: '4vh',
+                alignItems: 'center',
+            }}
+        >
             <div
                 style={{
                     display: 'flex',
@@ -14,8 +28,12 @@ const UserInfo = () => {
                     margin: '0 10px',
                 }}
             >
-                <Avatar src=''>N</Avatar>
-                <Text strong style={{fontSize: '1rem'}} level={4}>Logged in user</Text>
+                <Avatar src={photoURL}>
+                    {photoURL ? '' : displayName?.charAt(0)?.toUpperCase()}
+                </Avatar>
+                <Text strong style={{ fontSize: '1rem' }} level={4}>
+                    {displayName}
+                </Text>
             </div>
 
             <Button
