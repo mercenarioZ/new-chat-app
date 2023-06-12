@@ -13,6 +13,7 @@
     "@ant-design/icons": "5.0.1",
     "antd": "5.4.7",
     "date-fns": "2.30.0",
+    "email-validator": "2.0.4",
     "firebase": "9.22.0",
     "lodash": "4.17.21",
     "node-sass": "9.0.0",

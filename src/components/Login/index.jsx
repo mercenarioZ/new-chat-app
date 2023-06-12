@@ -2,7 +2,7 @@ import { Row, Col, Typography, Button } from 'antd'
 import { auth, db } from '../../firebase/config'
 const { Title } = Typography
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
 
 export default function Login() {
     const [signInWithGoogle] = useSignInWithGoogle(auth)
@@ -14,7 +14,7 @@ export default function Login() {
             const user = userData.user
 
             // Create/reference to database in Firestore
-            const docRef = doc(db, 'users', 'docId')
+            const docRef = doc(db, 'users', user?.email)
             await setDoc(
                 docRef,
                 {
@@ -22,8 +22,9 @@ export default function Login() {
                     email: user.email,
                     photoURL: user.photoURL,
                     uid: user.uid,
+                    lastLogin: serverTimestamp()
                 },
-                { merge: true }
+                { merge: true } // Just override params which has been modified.
             )
         } catch (error) {
             console.error('Error signing in: ', error)

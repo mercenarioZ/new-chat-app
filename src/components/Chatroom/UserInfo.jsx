@@ -16,7 +16,7 @@ const UserInfo = () => {
                 display: 'flex',
                 justifyContent: 'space-between',
                 borderBottom: '3px solid whitesmoke',
-                height: '4vh',
+                height: '5vh',
                 alignItems: 'center',
             }}
         >
@@ -31,7 +31,7 @@ const UserInfo = () => {
                 <Avatar src={photoURL}>
                     {photoURL ? '' : displayName?.charAt(0)?.toUpperCase()}
                 </Avatar>
-                <Text strong style={{ fontSize: '1rem' }} level={4}>
+                <Text strong style={{ fontSize: '.8rem', wordBreak: 'break-all', padding: '2px' }} level={4}>
                     {displayName}
                 </Text>
             </div>
