@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
+import { Avatar } from 'antd'
 import './Chatbox.css'
 
-const Chatbox = () => {
+export const Chatbox = ({chatName}) => {
     return (
         <div
             onClick={() => {
@@ -8,9 +10,11 @@ const Chatbox = () => {
             }}
             className='chat-box'
         >
-            <p className='chat-name'>Chat</p>
+            <Avatar className='chat-avatar' src={null}>
+                {chatName?.charAt(0)?.toUpperCase()}
+            </Avatar>
+            <p className='chat-name'>{chatName}</p>
         </div>
     )
 }
 
-export default Chatbox
