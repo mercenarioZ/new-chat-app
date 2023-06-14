@@ -2,12 +2,16 @@ import { UserAddOutlined } from '@ant-design/icons'
 import { Avatar, Button, Form, Input, Tooltip } from 'antd'
 import './ChatWindow.css'
 import Message from '../Message'
+import { useContext } from 'react'
+import { AuthContext } from '../../../context/AuthProvider'
+import { getRecipientEmail } from '../../../utils/getRecipientEmail'
 
 const ChatWindow = () => {
+
     return (
         <div className='wrapper'>
             <div className='header'>
-                <div className='header-name'>Box chat name</div>
+                <div className='header-name'>Chat name</div>
                 <div className='header-features'>
                     <Button icon={<UserAddOutlined />}>Invite</Button>
                     <Avatar.Group maxCount={2}>

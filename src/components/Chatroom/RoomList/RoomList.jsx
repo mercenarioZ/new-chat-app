@@ -6,23 +6,23 @@ import { AuthContext } from '../../../context/AuthProvider'
 
 const RoomList = () => {
     const {
-        user: { uid },
+        user: { email },
     } = useContext(AuthContext)
 
-    const roomsCondition = useMemo(() => {
+    const convsCondition = useMemo(() => {
         return {
-            fieldName: 'members',
+            fieldName: 'users',
             operator: 'array-contains',
-            compareValue: uid,
+            compareValue: email
         }
-    }, [uid])
+    }, [email])
 
-    const rooms = useFirestore('rooms', roomsCondition)
+    const conversations = useFirestore('conversations', convsCondition)
 
     return (
         <div className='room-list'>
-            {rooms.map((room) => (
-                <Chatbox key={room.id} chatName={room.name} />
+            {conversations.map((conversation) => (
+                <Chatbox id={conversation.id} key={conversation.id} conversationUsers={conversation.users[1]} />
             ))}
         </div>
     )

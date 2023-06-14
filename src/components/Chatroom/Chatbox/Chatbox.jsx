@@ -2,19 +2,13 @@
 import { Avatar } from 'antd'
 import './Chatbox.css'
 
-export const Chatbox = ({chatName}) => {
+export const Chatbox = ({ id, conversationUsers }) => {
     return (
-        <div
-            onClick={() => {
-                console.log('Clicked on chatbox')
-            }}
-            className='chat-box'
-        >
+        <div className='chat-box'>
             <Avatar className='chat-avatar' src={null}>
-                {chatName?.charAt(0)?.toUpperCase()}
+                {conversationUsers?.charAt(0)?.toUpperCase()}
             </Avatar>
-            <p className='chat-name'>{chatName}</p>
+            <p className='chat-name'>{conversationUsers}</p>
         </div>
     )
 }
-

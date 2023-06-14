@@ -4,8 +4,10 @@ import RoomList from './RoomList/RoomList'
 import { PlusSquareOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth } from '../../firebase/config'
+import { auth, db } from '../../firebase/config'
 import * as EmailValidator from 'email-validator'
+import { addDoc, collection, query, where } from 'firebase/firestore'
+import { useCollection } from 'react-firebase-hooks/firestore'
 
 const ChatSidebar = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -14,13 +16,28 @@ const ChatSidebar = () => {
     // console.log({user})
 
     const [recipientEmail, setRecipientEmail] = useState('') // State for your opponent's email
+
     const isInvitingSelf = recipientEmail === user?.email
 
-    const handleOk = () => {
+    const queryAllConvForCurrentUser = query(
+        collection(db, 'conversations'),
+        where('users', 'array-contains', user?.email)
+    )
+
+    const [convSnapshot] = useCollection(queryAllConvForCurrentUser)
+
+    const isConvExisted = (recipientEmail) => {
+        return convSnapshot?.docs.find(conversation => (conversation.data()).users.includes(recipientEmail))
+    }
+
+    const handleOk = async () => {
         // Handle create chat box
-        if (EmailValidator.validate(recipientEmail) && !isInvitingSelf) {
+        if (EmailValidator.validate(recipientEmail) && !isInvitingSelf && !isConvExisted(recipientEmail)) {
             // Check 2 conditions: the email is true and do not invite myself
             // Add user to a collection in Firestore named "conversation"
+            await addDoc(collection(db, 'conversations'), {
+                users: [user?.email, recipientEmail],
+            })
         }
 
         // Close the modal
