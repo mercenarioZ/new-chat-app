@@ -1,13 +1,8 @@
 import { UserAddOutlined } from '@ant-design/icons'
 import { Avatar, Button, Form, Input, Tooltip } from 'antd'
 import './ChatWindow.css'
-import Message from '../Message'
-import { useContext } from 'react'
-import { AuthContext } from '../../../context/AuthProvider'
-import { getRecipientEmail } from '../../../utils/getRecipientEmail'
 
 const ChatWindow = () => {
-
     return (
         <div className='wrapper'>
             <div className='header'>
@@ -36,21 +31,11 @@ const ChatWindow = () => {
 
             <div className='message-box'>
                 <div className='message-list'>
-                    <Message
+                    {/* <Message
                         message='hello'
                         displayName='Nguyen Vu'
                         time='1234543543'
-                    />
-                    <Message
-                        message='hello'
-                        displayName='Nguyen Vu'
-                        time='1234543543'
-                    />
-                    <Message
-                        message='hello'
-                        displayName='Nguyen Vu'
-                        time='1234543543'
-                    />
+                    /> */}
                 </div>
                 <Form className='form'>
                     <Form.Item>

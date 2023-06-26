@@ -33,7 +33,7 @@ const useFirestore = (collectionName, condition) => {
             )
         }
 
-        const unsubcribe = onSnapshot(q, (snapshot) => {
+        const unsubscribe = onSnapshot(q, (snapshot) => {
             const documents = snapshot.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
@@ -44,7 +44,7 @@ const useFirestore = (collectionName, condition) => {
             console.log({ documents })
         })
 
-        return () => unsubcribe()
+        return () => unsubscribe()
     }, [collectionName, condition])
 
     return documents

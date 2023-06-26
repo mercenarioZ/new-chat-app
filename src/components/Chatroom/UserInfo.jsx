@@ -7,7 +7,7 @@ const { Text } = Typography
 
 const UserInfo = () => {
     const {
-        user: { photoURL, uid, email, displayName },
+        user: { photoURL, displayName },
     } = useContext(AuthContext)
 
     return (

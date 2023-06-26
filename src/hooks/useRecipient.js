@@ -1,20 +1,27 @@
-import { useAuthState } from "react-firebase-hooks/auth"
-import { auth, db } from "../firebase/config"
-import { collection, query, where } from "firebase/firestore"
+import { collection, query, where } from 'firebase/firestore'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth, db } from '../firebase/config'
+import { getRecipientEmail } from '../utils/getRecipientEmail'
 import { useCollection } from 'react-firebase-hooks/firestore'
-import { getRecipientEmail } from "../utils/getRecipientEmail"
 
 export const useRecipient = (conversationUsers) => {
-    const [user] = useAuthState(auth)
+    const [loggedInUser] = useAuthState(auth)
 
-    // get recipient email
-    const recipientEmail = getRecipientEmail(conversationUsers, user)
+    // Get recipient's email
+    const recipientEmail = getRecipientEmail(conversationUsers, loggedInUser)
 
-    // get recipient avatar
-    const queryRecipient = query(collection(db, 'users'), where('email', '==', recipientEmail))
-    const [recipientSnapshot] = useCollection(queryRecipient)
+    // Query all the recipients' emails
+    const queryGetRecipient = query(
+        collection(db, 'users'),
+        where('email', '==', recipientEmail)
+    )
+
+    // Get the snapshot
+    const [recipientsSnapshot] = useCollection(queryGetRecipient)
 
     // recipient snapshot
-    const recipient = recipientSnapshot?.docs[0]?.data()
-    
+    // recipientsSnapshot could be an empty array.
+    const recipient = recipientsSnapshot?.docs[0]?.data()
+
+    return { recipient, recipientEmail }
 }

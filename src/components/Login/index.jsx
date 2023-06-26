@@ -10,7 +10,7 @@ export default function Login() {
     const signIn = async () => {
         try {
             const userData = await signInWithGoogle()
-            console.log({ userData })
+            console.log('[userData]', { userData })
             const user = userData.user
 
             // Create/reference to database in Firestore
@@ -22,7 +22,7 @@ export default function Login() {
                     email: user.email,
                     photoURL: user.photoURL,
                     uid: user.uid,
-                    lastLogin: serverTimestamp()
+                    lastLogin: serverTimestamp(),
                 },
                 { merge: true } // Just override params which has been modified.
             )

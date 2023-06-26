@@ -18,7 +18,7 @@ const AuthProvider = ({ children }) => {
                 const { displayName, uid, email, photoURL } = user
                 setUser({ displayName, uid, email, photoURL })
                 setIsLoading(false)
-                navigate('/')
+                navigate('/', { replace: true })
                 return
             }
 
@@ -28,10 +28,12 @@ const AuthProvider = ({ children }) => {
 
         // Clean-up function
         return () => unsubsrcibed()
-    }, [navigate])
+    }, [])
 
     return (
-        <AuthContext.Provider value={{ user }}>{isLoading ? <Spin /> : children}</AuthContext.Provider>
+        <AuthContext.Provider value={{ user }}>
+            {isLoading ? <Spin /> : children}
+        </AuthContext.Provider>
     )
 }
 
